@@ -1,0 +1,37 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Georgia', serif;
+}
+
+body {
+  background-color: #121212;
+  color: #ccc; /* Light grey-ish text for general readability */
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #1a1a1a; /* Slightly lighter than body background for depth */
+  color: #e63946; 
+  padding: 20px;
+}
+
+main {
+  padding: 20px;
+}
+
+a {
+  color: #f48fb1; /* Soft pink for links to contrast against the dark background */
+}
+
+footer {
+  background-color: #1a1a1a;
+  color: #e63946;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
