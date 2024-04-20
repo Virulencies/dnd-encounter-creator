@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchMonsters } from '../services/Api';
 //import { generateEncounters } from '../utility/generateEncounters';
 
@@ -8,6 +8,8 @@ function EncountersDisplay() {
     const { type, partyLevel } = location.state || { type: '', partyLevel: '' };
     const [encounter, setEncounter] = useState(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
 
   
     // get monsters by CR
@@ -59,15 +61,16 @@ function EncountersDisplay() {
       }, [type, partyLevel]);
   
     return (
-        <div>
-        <h2>Generated Encounter</h2>
-        {loading ? (
-          <p>Building Encounter...</p>
-        ) : (
-          encounter && <div>{`${encounter.count} x ${encounter.monster.name} (CR: ${encounter.monster.cr})`}</div>
-        )}
-      </div>
-    );
-  }
+    <div>
+      <h2>Generated Encounter</h2>
+      {loading ? (
+        <p>Building Encounter...</p>
+      ) : (
+        encounter && <div>{`${encounter.count} x ${encounter.monster.name} (CR: ${encounter.monster.cr})`}</div>
+      )}
+      <button onClick={() => navigate('/')}>New Encounter</button> {/* Button to navigate back to the main page */}
+    </div>
+  );
+}
   
   export default EncountersDisplay;

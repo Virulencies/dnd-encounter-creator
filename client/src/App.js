@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MonsterFilter from './components/MonsterFilter';
 import EncountersDisplay from './components/EncountersDisplay'; // For generating encounters
 import { fetchMonsters } from './services/Api';
+import './App.css';
+
 
 function App() {
   const [monsters, setMonsters] = useState([]);
@@ -31,16 +33,18 @@ function App() {
             <>
               <MonsterFilter onFilterChange={handleFilterChange} />
               <main>
+              <div className="main-content">
                 {monsters.map(monster => (
                   <div key={monster.slug}>{monster.name} - CR: {monster.cr}</div>
                 ))}
+                </div>
               </main>
             </>
           } />
           <Route path="/generate-encounter" element={<EncountersDisplay />} />
         </Routes>
-        <footer>
-          <p>© 2024 D&D Tools</p>
+        <footer className="App-footer">
+          <p>© 2024 No Copyright Inc.</p>
         </footer>
       </div>
     </Router>
