@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MonsterFilter from './components/MonsterFilter';
-import EncountersDisplay from './components/EncountersDisplay'; // For generating encounters
+import EncountersDisplay from './components/EncountersDisplay';
 import { fetchMonsters } from './services/Api';
 import './App.css';
 
@@ -11,7 +11,7 @@ function App() {
 
   const handleFilterChange = async (filters) => {
     try {
-      const allMonsters = await fetchMonsters(); // Assuming this fetches all monsters initially
+      const allMonsters = await fetchMonsters();
       const targetCrValue = parseFloat(filters.cr);
       const filteredMonsters = allMonsters.filter(monster =>
         monster.type.toLowerCase() === filters.type.toLowerCase() && monster.cr === targetCrValue

@@ -1,7 +1,7 @@
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
+  min-height: 100vh;
   justify-content: space-between;
 }
 
@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -69,18 +70,19 @@ button:hover {
   background-color: #21a1f1;
 }
 
-html, body {
-  height: 100%; 
+html,
+body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;  
-  overflow-y: auto;  
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .main-content {
   flex: 1;
-  overflow-y: auto; 
-  padding-bottom: 60px; 
+  overflow-y: auto;
+  padding-bottom: 60px;
 }
 
 .App-footer {
@@ -94,8 +96,13 @@ html, body {
 }
 
 a.label-link {
-  text-decoration: none;  /* Remove underline not working? */
+  text-decoration: none;
 }
+
+a.label-link:hover {
+  text-decoration: underline;
+}
+
 
 /*
 .App, .main-content, .App-footer {

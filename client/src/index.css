@@ -6,7 +6,7 @@ body, html {
 
 body {
   background-color: #121212;
-  color: #ccc; /* Light grey-ish text for general readability */
+  color: #ccc;
 }
 
 .App {
@@ -14,8 +14,8 @@ body {
 }
 
 .App-header {
-  background-color: #1a1a1a; /* Slightly lighter than body background for depth */
-  color: #e63946; 
+  background-color: #1a1a1a;
+  color: #e63946;
   padding: 20px;
 }
 
@@ -24,7 +24,7 @@ main {
 }
 
 a {
-  color: #f48fb1; /* Soft pink for links to contrast against the dark background */
+  color: #f48fb1;
 }
 
 footer {
@@ -34,4 +34,36 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .App-header, footer {
+    padding: 15px;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header, footer {
+    padding: 10px;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  body {
+    font-size: 12px;
+  }
+
+  a {
+    font-size: 12px;
+  }
 }
