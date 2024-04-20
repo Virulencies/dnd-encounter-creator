@@ -7,6 +7,8 @@ function EncountersDisplay() {
     const location = useLocation();
     const { type, partyLevel } = location.state || { type: '', partyLevel: '' };
     const [encounter, setEncounter] = useState(null);
+    const [loading, setLoading] = useState(false);
+
   
     // get monsters by CR
     function getMonstersByCR(monsters, cr) {
@@ -40,25 +42,29 @@ function EncountersDisplay() {
   
     // hook to fetch monsters and genrate encounter
     useEffect(() => {
-      const fetchAndGenerateEncounter = async () => {
-        try {
-          const allMonsters = await fetchMonsters();
-          const filteredMonsters = type ? allMonsters.filter(monster => monster.type.toLowerCase() === type.toLowerCase()) : allMonsters;
-          const generatedEncounter = generateEncounter(filteredMonsters, partyLevel, 4); // Assume 4 players or get this from user input
-          setEncounter(generatedEncounter);
-        } catch (error) {
-          console.error("Failed to fetch or generate encounter:", error);
-        }
-      };
-  
-      fetchAndGenerateEncounter();
-    }, [type, partyLevel]);
+        const fetchAndGenerateEncounter = async () => {
+          setLoading(true);
+          try {
+            const allMonsters = await fetchMonsters();
+            const filteredMonsters = type ? allMonsters.filter(monster => monster.type.toLowerCase() === type.toLowerCase()) : allMonsters;
+            const generatedEncounter = generateEncounter(filteredMonsters, partyLevel, 4); // Adjust this logic as needed
+            setEncounter(generatedEncounter);
+          } catch (error) {
+            console.error("Failed to fetch or generate encounter:", error);
+          }
+          setLoading(false);
+        };
+    
+        fetchAndGenerateEncounter();
+      }, [type, partyLevel]);
   
     return (
-      <div>
+        <div>
         <h2>Generated Encounter</h2>
-        {encounter && (
-          <div>{`${encounter.count} x ${encounter.monster.name} (CR: ${encounter.monster.cr})`}</div>
+        {loading ? (
+          <p>Building Encounter...</p>
+        ) : (
+          encounter && <div>{`${encounter.count} x ${encounter.monster.name} (CR: ${encounter.monster.cr})`}</div>
         )}
       </div>
     );
