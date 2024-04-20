@@ -1,6 +1,7 @@
-// src/App.js
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MonsterFilter from './components/MonsterFilter';
+import EncountersDisplay from './components/EncountersDisplay'; // For generating encounters
 import { fetchMonsters } from './services/Api';
 
 function App() {
@@ -8,38 +9,41 @@ function App() {
 
   const handleFilterChange = async (filters) => {
     try {
-      // Fetch all monsters without any filter...these will take awhile
-      const allMonsters = await fetchMonsters();
-      // Convert the 'cr' filter to a number for comparison
+      const allMonsters = await fetchMonsters(); // Assuming this fetches all monsters initially
       const targetCrValue = parseFloat(filters.cr);
-      // Filter the monsters based on 'type' and 'cr'(for now) provided in the filters object
       const filteredMonsters = allMonsters.filter(monster =>
         monster.type.toLowerCase() === filters.type.toLowerCase() && monster.cr === targetCrValue
       );
       setMonsters(filteredMonsters);
     } catch (error) {
       console.error('Failed to fetch monsters:', error);
-      // Handle errors
     }
   };
-  
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>D&D Encounter Generator</h1>
-      </header>
-      <MonsterFilter onFilterChange={handleFilterChange} />
-      {/* Display the filtered monsters here, eventually the challenges if i dont give them a page */}
-      <main>
-        {monsters.map(monster => (
-          <div key={monster.slug}>{monster.name} - CR: {monster.cr}</div>
-        ))}
-      </main>
-      <footer>
-        <p>© 2024 D&D Tools</p>
-      </footer>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>D&D Encounter Generator</h1>
+        </header>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <MonsterFilter onFilterChange={handleFilterChange} />
+              <main>
+                {monsters.map(monster => (
+                  <div key={monster.slug}>{monster.name} - CR: {monster.cr}</div>
+                ))}
+              </main>
+            </>
+          } />
+          <Route path="/generate-encounter" element={<EncountersDisplay />} />
+        </Routes>
+        <footer>
+          <p>© 2024 D&D Tools</p>
+        </footer>
+      </div>
+    </Router>
   );
 }
 
