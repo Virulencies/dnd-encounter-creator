@@ -1,0 +1,19 @@
+[
+    {
+      "slug": "a-mi-kuk",
+      "name": "A-mi-kuk",
+      "size": "Huge",
+      "type": "Aberration",
+      "alignment": "chaotic evil",
+      "armor_class": 14,
+      "armor_desc": "natural armor",
+      "hit_points": 115,
+      "hit_dice": "10d12+50",
+      "speed": {
+        "walk": 30,
+        "swim": 40
+      },
+      "challenge_rating": "7",
+      "cr": 7.0
+    }
+  ]

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchMonsters } from '../services/Api';
+import PropTypes from 'prop-types';
+
 
 function EncountersDisplay() {
     const location = useLocation();
@@ -74,5 +76,16 @@ function EncountersDisplay() {
         </div>
     );
 }
+
+EncountersDisplay.propTypes = {
+    location: PropTypes.shape({
+        state: PropTypes.shape({
+            type: PropTypes.string,
+            partyLevel: PropTypes.string
+        })
+    })
+};
+
+//note that hooks dont technically require proptypes, and this isnt really receiving props, so this poptype is mostly just informational
 
 export default EncountersDisplay;
